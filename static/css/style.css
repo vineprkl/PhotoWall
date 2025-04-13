@@ -1,0 +1,501 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* --- Global Styles & Apple Style --- */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    line-height: 1.6;
+    background-color: #FFFFFF; /* 纯白 */
+    color: #778899; /* 蓝灰色 */
+    padding: 40px 0; /* Adjusted: Only top/bottom padding on body */
+}
+
+header {
+    padding: 20px 0; /* Slightly reduced padding */
+    margin-bottom: 25px; /* Slightly reduced margin */
+    border-bottom: 1px solid #DCEEF5; /* Derived from 浅天蓝色 */
+    background-color: transparent; /* Match body */
+    text-align: center; /* Center header content */
+}
+
+h1 {
+    font-size: 2.2em; /* Larger main title */
+    font-weight: 600;
+    color: #1d1d1f;
+    margin-bottom: 0; /* Reset margin if inside header */
+}
+
+/* Style for the new header timer div */
+.header-title {
+    font-size: 2.2em; 
+    font-weight: 600;
+    color: #778899; /* 蓝灰色 title */
+    margin-bottom: 0; 
+    line-height: 1.2; /* Adjust line height if needed */
+}
+
+h2 {
+    margin-bottom: 1.2em; /* Slightly more space */
+    font-weight: 600;
+    font-size: 1.5em;
+    color: #1d1d1f;
+}
+
+button, input[type="submit"] {
+    background-color: #007aff; /* Apple blue */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px; /* Rounded corners */
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s ease;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #005ecb; /* Darker blue on hover */
+}
+
+input[type="file"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+section {
+    background-color: #ffffff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 12px; /* More rounded corners for sections */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+}
+
+a {
+    color: #B2D8B4; /* 鼠尾草绿 */
+    text-decoration: none;
+}
+
+a:hover {
+    filter: brightness(90%);
+}
+
+/* --- Photo Grid (index.html) --- */
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px; /* Increased gap */
+}
+
+.photo-item {
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07); /* Slightly softer */
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, filter 0.2s ease-out, border-color 0.2s ease-out; /* Use ease-out */
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid transparent; /* Add base transparent border */
+}
+
+.photo-item:hover {
+    transform: translateY(-3px); /* Lift slightly instead of scale */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.09);
+    /* filter: brightness(1.03); /* Optional brightness */
+    border-color: #e0e0e0; /* Show subtle border on hover */
+}
+
+.photo-item img {
+    display: block;
+    width: 100%;
+    height: auto; 
+    /* Removed object-fit and aspect-ratio */
+    opacity: 0; /* Start hidden for fade-in */
+    transition: opacity 0.4s ease-out; /* Use ease-out */
+}
+
+/* Add a class for when image is loaded (can be set by JS later) */
+.photo-item img.loaded {
+    opacity: 1;
+}
+
+/* Timestamp Style (Below Image) */
+.photo-timestamp {
+    color: #808080; /* 中灰色 */
+    font-size: 0.8em; 
+    padding: 0;
+    text-align: center;
+    margin-top: 6px; 
+    opacity: 1; 
+    transition: none;
+}
+
+/* --- Lightbox (index.html) --- */
+.lightbox {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.8); /* Black w/ opacity */
+    align-items: center; /* Vertical center */
+    justify-content: center; /* Horizontal center */
+    padding: 20px;
+    backdrop-filter: blur(5px); /* Background blur (Apple style) */
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.lightbox-content {
+    display: block;
+    margin: auto;
+    max-width: 90%;
+    max-height: 85vh; /* Slightly more height allowed */
+    border-radius: 18px; /* More rounding for the image */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3); /* Stronger shadow for popup */
+}
+
+.lightbox-caption {
+    text-align: center;
+    color: #dadada; /* Slightly lighter */
+    padding: 18px 0 8px 0; /* Adjust spacing */
+    font-size: 0.95em; /* Slightly smaller */
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px; /* Consistent spacing */
+    right: 30px; /* Consistent spacing */
+    color: #ccc; /* Lighter close button */
+    font-size: 35px;
+    font-weight: normal; /* Less bold */
+    line-height: 1;
+    transition: 0.3s ease-out; /* Use ease-out */
+    cursor: pointer;
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.download-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 9px 18px; /* Adjusted padding */
+    background-color: rgba(178, 216, 180, 0.2); /* Transparent 鼠尾草绿 */
+    color: #fff;
+    border: 1px solid rgba(178, 216, 180, 0.4);
+    border-radius: 8px; /* Consistent rounding */
+    text-decoration: none;
+    font-size: 0.95em;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    backdrop-filter: blur(2px); /* Subtle blur on button */
+}
+
+.download-button:hover {
+    background-color: rgba(178, 216, 180, 0.4);
+    border-color: rgba(178, 216, 180, 0.6);
+    text-decoration: none;
+    color: #fff;
+}
+
+/* --- Admin Page Styles (admin.html) --- */
+.admin-container {
+    max-width: 1300px; /* Wider still */
+    margin: 40px auto;
+    padding: 0 20px; /* Add padding for smaller screens */
+    text-align: center; /* Center the h1 title */
+}
+
+/* Refined Admin Content Wrapper Layout */
+.admin-content-wrapper {
+    /* display: grid; REMOVED */
+    /* grid-template-columns: 1fr; REMOVED */
+    gap: 35px; /* Keep gap for vertical spacing */
+}
+
+/* Refined Admin Sections */
+.admin-container section {
+    background-color: #ffffff;
+    padding: 30px 35px; /* Increased padding */
+    border-radius: 16px; 
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05); 
+    border: 1px solid #E8F5E9; 
+}
+
+/* Admin Headings */
+.upload-section h2, .image-list-section h2 {
+    margin-top: 0;
+    margin-bottom: 1.2em; /* Reduced space below heading */
+    font-size: 1.3em; /* Slightly smaller */
+    border-bottom: none; /* Remove border from h2 */
+    padding-bottom: 0; /* Remove padding */
+    color: #333;
+}
+
+/* Admin Upload Form Large Dropzone */
+.upload-section form {
+    display: flex;
+    flex-direction: column; /* Back to column */
+    align-items: stretch; /* Stretch items */
+    gap: 20px; /* Increase gap */
+}
+
+/* Style for the custom file input label */
+.file-input-label {
+    display: flex; /* Use flex for centering text */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px; /* Large padding */
+    border: 2px dashed #ADD3DE; /* Dashed border using derived color */
+    border-radius: 12px;
+    background-color: #f8fcff; /* Very light blue tint */
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s ease-out, border-color 0.2s ease-out;
+}
+
+.file-input-label span {
+    color: #778899; /* Text color */
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+.file-input-label:hover {
+    background-color: #e0f2f7; /* Light blue on hover */
+    border-color: #77aabb; /* Darker border */
+}
+
+/* Hide the actual input - style moved here from HTML */
+#photos {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+    width: 0.1px;
+    height: 0.1px;
+    overflow: hidden;
+}
+
+/* Make submit button full width */
+.upload-section button[type="submit"] {
+    padding: 12px 20px; /* Adjust padding */
+    font-weight: 500;
+    font-size: 1.05em;
+    width: 100%; /* Full width */
+    flex-shrink: 0; 
+}
+
+#upload-status {
+    margin-top: 0; /* Reset margin */
+    padding-top: 5px; /* Add padding instead */
+    width: 100%; 
+    font-size: 0.9em;
+    text-align: center; /* Center status text */
+}
+
+/* Admin Table Enhancements */
+.admin-table {
+    margin-top: 10px; /* Added a small margin */
+}
+
+.admin-table th, .admin-table td {
+    padding: 16px 14px; /* Increased padding */
+    font-size: 0.98em; /* Slightly larger font */
+}
+
+.admin-table th {
+    font-size: 0.88em;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+/* Table Row Hover */
+.admin-table tbody tr:hover {
+    background-color: #F0F8F0; /* Slightly darker green tint hover */
+}
+
+/* Hidden Image Row Style */
+tr.image-hidden {
+    opacity: 0.5;
+    /* filter: grayscale(50%); Optional alternative */
+}
+tr.image-hidden:hover {
+    opacity: 0.7;
+    background-color: #F0F8F0; /* Ensure hover background applies */
+}
+
+/* Table Row Striping */
+.admin-table tbody tr:nth-child(even) {
+    background-color: #F8FCF8; /* Derived from 灰绿色 */
+}
+.admin-table tbody tr:nth-child(even):hover {
+    background-color: #ECF5EC; /* Adjust even row hover */
+}
+
+.admin-thumbnail {
+    width: 65px; /* Slightly larger */
+    height: 65px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Action Button Refinements */
+.action-buttons {
+    gap: 10px;
+}
+
+.admin-table td button {
+    padding: 7px 14px; /* Adjusted padding */
+    font-size: 0.88em;
+    font-weight: 500;
+    opacity: 1; /* Remove opacity */
+}
+
+.admin-table td button:hover {
+     filter: brightness(90%); /* Darken slightly on hover */
+}
+
+/* --- Admin Filter Styles --- */
+.admin-filters {
+    margin-top: -1em; /* Pull filters closer to heading */
+    margin-bottom: 20px; 
+    padding: 8px; /* Reduced padding */
+    background-color: #E8F5E9; /* 极浅的灰绿色 */
+    border-radius: 10px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.admin-filter-btn {
+    padding: 9px 20px;
+    font-size: 0.9em;
+    border-radius: 8px;
+    border: none; /* No border */
+    background-color: transparent; /* Transparent background */
+    color: #778899; /* 蓝灰色 */
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.admin-filter-btn:hover {
+    background-color: rgba(178, 216, 180, 0.1); /* Transparent 鼠尾草绿 */
+    color: #556677;
+}
+
+.admin-filter-btn.active {
+    background-color: #fff; /* White background for active */
+    color: #B2D8B4; /* 鼠尾草绿 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+/* Add specific admin responsive adjustments if needed */
+@media (max-width: 991px) {
+    .admin-container {
+        max-width: 100%; /* Use full width */
+        margin: 20px auto;
+    }
+    .admin-content-wrapper {
+        /* grid-template-columns: 1fr; REMOVED */
+    }
+    .admin-container section {
+        padding: 20px;
+        border-radius: 12px;
+    }
+}
+
+@media (max-width: 600px) {
+    /* Override previous general responsive rules if needed */
+    .admin-table th, .admin-table td {
+        padding: 10px 8px;
+        font-size: 0.9em;
+    }
+    .admin-thumbnail {
+         width: 45px; /* Smaller on mobile */
+         height: 45px;
+         border-radius: 6px;
+    }
+    .action-buttons {
+        flex-direction: column; /* Stack buttons on mobile */
+        align-items: flex-start;
+        gap: 6px;
+    }
+    .admin-table td button {
+        width: 100%; /* Full width buttons */
+        text-align: center;
+    }
+}
+
+/* Style definitions will be added in subsequent steps */
+
+/* Category Filter Styles */
+.category-filters {
+    margin-top: 15px; /* Reduced space */
+    display: flex;
+    gap: 8px; /* Slightly reduced gap */
+    flex-wrap: wrap;
+    justify-content: center; /* Center filter buttons */
+}
+
+.filter-btn {
+    padding: 7px 16px; /* Slightly smaller padding */
+    font-size: 0.9em; /* Slightly smaller font */
+    border-radius: 18px; /* Adjust rounding */
+    border: 1px solid #DCEEF5; /* Derived from 浅天蓝色 */
+    background-color: transparent; /* Transparent inactive */
+    color: #808080; /* 中灰色 */
+    cursor: pointer;
+    transition: background-color 0.2s ease-out, color 0.2s ease-out, border-color 0.2s ease-out;
+}
+
+.filter-btn:hover {
+    background-color: #E0F2F7; /* 浅天蓝色 */
+    border-color: #ADD3DE; /* Derived */
+    color: #556677; /* Darker 蓝灰色 */
+}
+
+.filter-btn.active {
+    background-color: #B2D8B4; /* 鼠尾草绿 */
+    color: #fff;
+    border-color: #B2D8B4;
+}
+
+/* General review of transitions */
+button, input[type="submit"], .filter-btn, .admin-filter-btn, .admin-table td button {
+    transition-timing-function: ease-out; /* Prefer ease-out */
+}
+
+/* Admin Action Buttons */
+.btn-toggle {
+    background-color: #B2D8B4; /* 鼠尾草绿 */
+    color: #fff;
+}
+.btn-toggle:hover {
+     filter: brightness(95%);
+}
+
+.btn-delete {
+    background-color: #FFA07A; /* LightSalmon (淡珊瑚粉 approx) */
+    color: #fff;
+}
+.btn-delete:hover {
+     filter: brightness(95%);
+}
+
+/* New Wrapper for Centering */
+.page-content-wrapper {
+    max-width: 1500px; /* Adjust max width as needed */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 25px; /* Padding for smaller screens */
+} 

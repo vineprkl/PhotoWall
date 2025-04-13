@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>照片管理</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="admin-container">
+        <h1>照片管理</h1>
+        
+        <div class="admin-content-wrapper">
+            <section class="upload-section">
+                <h2>上传新照片</h2>
+                <form action="{{ url_for('upload_photos') }}" method="post" enctype="multipart/form-data" id="upload-form">
+                    <!-- Visually hidden file input -->
+                    <input type="file" name="photos" id="photos" multiple required accept=".png,.jpg,.jpeg,.gif" style="opacity:0; position:absolute; z-index:-1; width:0.1px; height:0.1px; overflow:hidden;">
+                    <!-- Custom styled label acting as drop zone / button -->
+                    <label for="photos" class="file-input-label">
+                        <span>点击或拖拽文件到此处上传</span>
+                        <!-- Optionally add an icon here later -->
+                    </label>
+                    <button type="submit">上传</button>
+                </form>
+                <p id="upload-status"></p>
+            </section>
+
+            <section class="image-list-section">
+                <h2>已上传图片</h2>
+                
+                <!-- Admin Filters moved here -->
+                <div class="admin-filters">
+                    <button class="admin-filter-btn active" data-filter="All">全部</button>
+                    <button class="admin-filter-btn" data-filter="游戏">游戏</button>
+                    <button class="admin-filter-btn" data-filter="活动">活动</button>
+                    <button class="admin-filter-btn" data-filter="已隐藏">已隐藏</button>
+                </div>
+                
+                <div id="admin-image-list">
+                    <p>正在加载图片...</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Modified JS to wrap admin table buttons later if needed by CSS
+        // Or better, modify the JS that generates the table rows
+        // (Let's modify JS directly - Checklist Item 6 will handle CSS)
+    </script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html> 

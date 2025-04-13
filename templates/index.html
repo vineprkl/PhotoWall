@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>照片墙</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="page-content-wrapper">
+        <header>
+            <div id="header-title" class="header-title">Loading Timer...</div>
+            <nav class="category-filters">
+                <button class="filter-btn active" data-category="游戏">游戏</button>
+                <button class="filter-btn" data-category="活动">活动</button>
+            </nav>
+        </header>
+        <main>
+            <div id="photo-grid" class="photo-grid">
+                <!-- 照片将由 JavaScript 动态加载 -->
+                <p>正在加载照片...</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- 模态框/Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <div class="lightbox-caption">
+            <p id="lightbox-timestamp"></p>
+            <a id="download-link" class="download-button" download>下载原图</a>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html> 

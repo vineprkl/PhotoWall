@@ -1,0 +1,5 @@
+Flask
+Flask-SQLAlchemy
+Pillow
+python-dotenv
+waitress 
