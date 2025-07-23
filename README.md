@@ -28,7 +28,6 @@
 - 数据库: SQLite
 - 图片处理: Pillow
 - 前端: HTML, CSS, JavaScript
-- 生产部署 (推荐): Waitress
 
 ## 设置与运行
 
